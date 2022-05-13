@@ -141,7 +141,7 @@ export default Quotes
 ```
 Check your console.log statement using `Ctrl+Shift+J` and see if your getting the correct data from the API. 
 
-How do we grab the data from the API?
+**How do we grab the data we need from the API?**
 
 The funcion we just created will need to be modified further to generate a quote at random so that we have access to them. 
 
@@ -331,7 +331,7 @@ npm start
 
 Open http://localhost:3000/ in browser:
 
-<img width="926" alt="post" src="https://user-images.githubusercontent.com/91548582/168082359-18de19a1-3430-4981-90e6-74f6a4ea5a69.PNG">
+<img width="923" alt="reactJS" src="https://user-images.githubusercontent.com/101202952/168287433-6f324b08-ce79-48c0-9460-3b305fa03f6f.PNG">
 
 
 ## Netlify Deployment
@@ -348,7 +348,7 @@ Deploy the build folder manually to [Netlify](https://www.netlify.com/).
 
 Deployment Output:
 
-<img width="929" alt="netlify" src="https://user-images.githubusercontent.com/91548582/168083938-affeaa44-8530-469a-b8f1-e2cc85c8355c.PNG">
+<img width="923" alt="reactJS" src="https://user-images.githubusercontent.com/101202952/168287433-6f324b08-ce79-48c0-9460-3b305fa03f6f.PNG">
 
 
 Talk Soon! 
