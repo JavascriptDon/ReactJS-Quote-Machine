@@ -1,70 +1,354 @@
-# Getting Started with Create React App
+# ReactJS-Quote-Machine
+Create react app by the following command
+``` 
+npx create-react-app random-quote-machine
+```
+CD into the App Folder.
+```
+cd random-quote-machine
+```
+Run npm start
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Now your project is up and running. Let's start coding!
 
-## Available Scripts
+<img width="277" alt="rea" src="https://user-images.githubusercontent.com/91548582/168083240-fef6d264-6b18-433a-b9c2-2fe2ad67e217.PNG">
 
-In the project directory, you can run:
+## Folder Structure
 
-### `npm start`
+On the root level, we will keep the following files. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Index.JS
+- App.JS
+- App.CSS
+- Index.CSS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Index Component  
 
-### `npm test`
+No Changes will need to be made to the Index.js file or Index.css file and we will use the default boilerplate code for the duration of the project. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+```
 
-### `npm run eject`
+## App Component 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Clean up your App.js by removing any unused files and get it to look like this.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+import './App.css';
+import React from 'react';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+function App () {
+return (
+  <div className="App">
+    Hello World!
+    <div>
+ );
+}
 
-## Learn More
+export default App;
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Quotes Component 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For this project we'll create a component called 'Quotes.js' which will contain a react arrow functional component like so:
 
-### Code Splitting
+```
+import React from 'react';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+const Quotes = () => {
+  return (
+    <div>Quotes</div>
+  )
+}
 
-### Analyzing the Bundle Size
+export default Quotes
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Then bring the newly created component into App.js. 
 
-### Making a Progressive Web App
+```
+import './App.css';
+import Quotes from './components/Quotes';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+function App() {
+  return (
+    <div className="App">
+    <Quotes />
+    </div>
+  );
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+export default App;
+```
 
-### Deployment
+Now let's log the data from the QuotesApi using useState, useEffect Hook from React and define it. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+import React,{useState, useEffect} from 'react';
 
-### `npm run build` fails to minify
+const Quotes = () => {
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
+  
+  const gettingQuote = () => {
+    let url = `https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json`;
+    fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+  }
+  
+  useEffect(() => {
+  gettingQuote();
+  }, []);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  return (
+    <div>Quotes</div>
+  )
+}
+
+export default Quotes
+
+```
+Check your console.log statement using `Ctrl+Shift+J` and see if your getting the correct data from the API. 
+
+How do we grab the data from the API?
+
+The funcion we just created will need to be modified further to generate a quote at random so that we have access to them. 
+
+```
+import React,{useState, useEffect} from 'react';
+
+const Quotes = () => {
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
+  
+  const gettingQuote = () => {
+    let url = `https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json`;
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      let quotes = data.quotes;
+      let randomNum = Math.floor(Math.random() * quotes.length);
+      let randomQuote = quotes[randomNum];
+      console.log(randomQuote);
+    })
+  }
+  
+  useEffect(() => {
+  gettingQuote();
+  }, []);
+
+  return (
+    <div>Quotes</div>
+  )
+}
+
+export default Quotes
+
+```
+
+Check the console again and view the data your getting from the API.
+
+Now let's put everything together along with any styling to complete the project!
+
+```
+import React, {useState, useEffect} from 'react';
+import twitterIcon from '../twitter.svg';
+import tumblrIcon from '../tumblr.svg';
+
+const Quotes = () => {
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
+
+  useEffect(() => {
+    gettingQuote();
+  }, []);
+
+  const gettingQuote = () => {
+    let url = `https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json`;
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      let quotes = data.quotes;
+      let randomNum = Math.floor(Math.random() * quotes.length);
+      let randomQuote = quotes[randomNum];
+      console.log(randomQuote);
+      setQuote(randomQuote.quote);
+      setAuthor(randomQuote.author);
+    })
+  }
+
+  const clickEvent = () => {
+    gettingQuote();
+  }
+
+  return (
+    <div id="container">
+    <div id="text"> <p>{quote}</p></div>
+    <div id="author"><p>{author}</p></div>
+    <div id="buttons">
+      <div className='social-media-icons'>
+        <a id="tweet-quote" href="http://twitter.com/intent/tweet/" target="_blank" rel="noreferrer">
+          <span><img src={twitterIcon} alt="" /></span>
+        </a>
+        <a id="tumblr-quote" href="https://www.tumblr.com" target="_blank" rel="noreferrer">
+          <span><img src={tumblrIcon} alt="" /></span>
+        </a>
+      </div>
+      <button onClick={clickEvent} id="new-quote">New Quote</button>
+    </div>
+    </div>
+  )
+}
+
+export default Quotes
+```
+
+## Styling the App
+
+App.css will contain our styling code for our Random Quote Machine. 
+
+```
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}   
+
+body{
+    font-family: 'Roboto Mono', monospace;
+    background-color: aliceblue;
+    overflow: hidden;
+}
+
+#container{
+    background-color: white;
+    box-shadow: 20px 10px 20px rgb(0, 58, 92);
+    width: 40rem;
+    margin:10rem auto;
+    padding: 3rem;
+    border-radius: 10px;
+}
+
+#text{
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+#author::before {
+    content: "-";
+  }
+  
+#author{
+    display:flex;
+    justify-content: flex-end;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top:2rem;
+}
+
+.social-media-icons{
+    display: flex;
+}
+.social-media-icons > a{
+    margin-right: .5rem;
+    background: linear-gradient(to right, #2aa4f4, #007ad9); 
+    border-radius: 5px;
+    padding: .5rem .5rem;
+    cursor:pointer;
+}
+
+.social-media-icons > a:hover{
+    opacity: .9;
+}
+
+.social-media-icons > a img {
+    width: 1.5rem;
+}
+
+#new-quote {
+    background: linear-gradient(to right, #2aa4f4, #007ad9); 
+    border: none;
+    color: #ffffff;
+    padding: .7rem 1rem;
+    font-size: .9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    outline: none;
+    cursor:pointer;
+}
+
+#new-quote:hover{
+    opacity: .9;
+}
+```
+
+## Run The App
+
+Open the terminal and type the following command.
+
+```
+npm start
+```
+
+Open http://localhost:3000/ in browser:
+
+<img width="926" alt="post" src="https://user-images.githubusercontent.com/91548582/168082359-18de19a1-3430-4981-90e6-74f6a4ea5a69.PNG">
+
+
+## Netlify Deployment
+
+Open the terminal and type the following command.
+
+```
+npm run build
+```
+Deploy the build folder manually to [Netlify](https://www.netlify.com/).
+
+<img width="706" alt="netlify" src="https://user-images.githubusercontent.com/91548582/168083406-3b7dd444-f27b-4b13-bc5b-99bc2cec518f.PNG">
+
+
+Deployment Output:
+
+<img width="929" alt="netlify" src="https://user-images.githubusercontent.com/91548582/168083938-affeaa44-8530-469a-b8f1-e2cc85c8355c.PNG">
+
+
+Talk Soon! 
